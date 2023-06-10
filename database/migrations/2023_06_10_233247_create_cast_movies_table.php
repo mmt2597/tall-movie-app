@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGenresTable extends Migration
+class CreateCastMoviesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateGenresTable extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('cast_movies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tmdb_id')->unique();
-            $table->string('title')->unique();
-            $table->string('slug');
-            $table->timestamps();
+            $table->foreignId('cast_id')->constrained();
+            $table->foreignId('movie_id')->constrained();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateGenresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('cast_movies');
     }
 }
